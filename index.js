@@ -18,11 +18,11 @@ app.use(express.json());
 app.use(cors());
 app.use('/g', urlRoute);
 
-app.get('/g/:shortId', async (req, res) => {
-    const shortId = req.params.shortId;
-    const entry = await URL.findOneAndUpdate(
+app.get('/g/:id', async (req, res) => {
+    const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+    const entry = await URL.findOne(
         {
-            shortId
+            shortened_url: fullUrl
         }
     );
     res.redirect(entry.destination);
