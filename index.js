@@ -16,9 +16,9 @@ mongoose.connect(process.env.MONGODB_URI,
 
 app.use(express.json());
 app.use(cors());
-app.use('/', urlRoute);
+app.use('/g', urlRoute);
 
-app.get('/g/shortId', async (req, res) => {
+app.get('/g/:shortId', async (req, res) => {
     const shortId = req.params.shortId;
     const entry = await URL.findOneAndUpdate(
         {
